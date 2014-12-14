@@ -18,7 +18,7 @@ angular
     'ngClipboard'
   ])
   .config(function(ngClipProvider) {
-    ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+    ngClipProvider.setPath('fonts/ZeroClipboard.swf');
   })
   .controller('MainCtrl', function($scope, $mdToast, Week, Thought) {
 
