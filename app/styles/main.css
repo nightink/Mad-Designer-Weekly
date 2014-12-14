@@ -12,6 +12,17 @@ body {
   font-size: 1.2em;
 }
 
+.key-shortcut {
+  width: 90%;
+  padding: 40px 40px 0;
+  color: #DBDBDB;
+  font-size: 0.8em;
+}
+
+.key-shortcut > span {
+  color: #03a9f4;
+}
+
 .container {
   padding: 40px;
   color: #DBDBDB;
@@ -34,6 +45,7 @@ body {
 
 .container table input {
   width: 100%;
+  font-size: 0.8em;
 }
 
 .container textarea {

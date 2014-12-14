@@ -20,65 +20,77 @@
   </head>
   <body ng-app="app" ng-controller="MainCtrl">
 
-    <md-button class="md-fab md-primary generate" ng-click="generate()" aria-label="generate">
+    <md-button class="md-fab md-primary generate" clip-copy="generate()" aria-label="generate">
       <i class="icon-doc"></i>
     </md-button>
 
-    <!-- 本周 -->
-    <md-content md-theme="light-blue-dark" class="container" id="thisWeek">
-      <div class="row">
-        <md-text-float class="long" label="本周" ng-model="thisWeek.title"></md-text-float>
+    <md-content md-theme="light-blue-dark">
+      <!-- 快捷键说明 -->
+      <div class="key-shortcut">
+        <h3>快捷键说明</h3>
+        <span>'Enter'</span>: &nbsp;添加一行, &nbsp;
+        <span>'Command + Delete'</span>: &nbsp;删除当前行, &nbsp;
+        <span>'&#8593; &#8595; &#8592; &#8594;'</span>: &nbsp;单元格切换
       </div>
-      <div class="row">
-        <table>
-          <thead>
-            <th ng-repeat="x in thisWeek.cols" width={{x.width}}>{{x.text}}</th>
-          </thead>
-          <tbody>
-            <tr ng-repeat="x in thisWeek.rows">
-              <td ng-repeat="y in thisWeek.cols">
-                <md-text-float ng-model="x['col_' + $index]"
-                  ng-keydown="keyboard.keydown($event, 'thisWeek', $parent.$index)"
-                  ng-keyup="keyboard.keyup($event, 'thisWeek')"></md-text-float>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </md-content>
 
-    <!-- 下周 -->
-    <md-content md-theme="light-blue-dark" class="container" id="nextWeek">
-      <div class="row">
-        <md-text-float class="long" label="下周" ng-model="nextWeek.title"></md-text-float>
+      <!-- 本周 -->
+      <div class="container" id="thisWeek">
+        <div class="row">
+          <md-text-float class="long" label="This Week" ng-model="thisWeek.title"></md-text-float>
+        </div>
+        <div class="row">
+          <table>
+            <thead>
+              <th ng-repeat="x in thisWeek.cols" width={{x.width}}>{{x.text}}</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in thisWeek.rows">
+                <td ng-repeat="y in thisWeek.cols">
+                  <md-text-float ng-model="x['col_' + $index]"
+                  ng-keydown="keyboard.keydown($event, 'thisWeek', $parent.$index, $index)"
+                  ng-keyup="keyboard.keyup($event, 'thisWeek')"></md-text-float>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="row">
-        <table>
-          <thead>
-            <th ng-repeat="x in nextWeek.cols">{{x.text}}</th>
-          </thead>
-          <tbody>
-            <tr ng-repeat="x in nextWeek.rows">
-              <td ng-repeat="y in nextWeek.cols">
-                <md-text-float ng-model="x['col_' + $index]"
+
+      <!-- 下周 -->
+      <div class="container"  id="nextWeek">
+        <div class="row">
+          <md-text-float class="long" label="Next Week" ng-model="nextWeek.title"></md-text-float>
+        </div>
+        <div class="row">
+          <table>
+            <thead>
+              <th ng-repeat="x in nextWeek.cols">{{x.text}}</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in nextWeek.rows">
+                <td ng-repeat="y in nextWeek.cols">
+                  <md-text-float ng-model="x['col_' + $index]"
                   ng-keydown="keyboard.keydown($event, 'nextWeek', $parent.$index)"
                   ng-keyup="keyboard.keyup($event, 'nextWeek')"></md-text-float>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 吐槽 -->
+      <div class="container">
+        <div class="row">
+          <md-text-float class="long" label="Thoughts" ng-model="thoughts.title"></md-text-float>
+        </div>
+        <div class="row">
+          <textarea ng-model="thoughts.content"></textarea>
+        </div>
       </div>
     </md-content>
 
-    <!-- 吐槽 -->
-    <md-content md-theme="light-blue-dark" class="container">
-      <div class="row">
-        <md-text-float class="long" label="吐槽" ng-model="thisWeek.title"></md-text-float>
-      </div>
-      <div class="row">
-        <textarea></textarea>
-      </div>
-    </md-content>
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -91,12 +103,15 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/hammerjs/hammer.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+    <script src="bower_components/ng-clip/dest/ng-clip.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/week.js"></script>
+        <script src="scripts/thought.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -14,9 +14,13 @@ angular
     'ngAria',
     'ngCookies',
     'ngSanitize',
-    'ngMaterial'
+    'ngMaterial',
+    'ngClipboard'
   ])
-  .controller('MainCtrl', function($scope, $mdToast, Week) {
+  .config(function(ngClipProvider) {
+    ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+  })
+  .controller('MainCtrl', function($scope, $mdToast, Week, Thought) {
 
     $scope.thisWeek = new Week({
       el: document.getElementById('thisWeek'),
@@ -28,6 +32,11 @@ angular
       el: document.getElementById('nextWeek'),
       title: '下周计划',
       cols: [{text: '工作任务'}, {text: '预计时间'}]
+    });
+
+    $scope.thoughts = new Thought({
+      title: '感想',
+      content: ''
     });
 
     function getWeek(week) {
@@ -51,15 +60,36 @@ angular
           return 'command + delete';
         }
       },
-      keydown: function($event, week, $index) {
-        if ($event.keyCode == 13) {
-          getWeek(week).addRow()
+      keydown: function($event, week, rowIndex, cellIndex) {
+        var keyCode = $event.keyCode;
+
+        if (keyCode == 13) {
+          getWeek(week).addRow(rowIndex)
+
+        } else if (keyCode > 36 && keyCode < 41) {
+
+          switch (keyCode) {
+            case 37:
+              getWeek(week).leftCell(rowIndex, cellIndex);
+              break;
+            case 38:
+              getWeek(week).upCell(rowIndex, cellIndex);
+              break;
+            case 39:
+              getWeek(week).rightCell(rowIndex, cellIndex);
+              break;
+            case 40:
+              getWeek(week).downCell(rowIndex, cellIndex);
+              break;
+            default:
+              break;
+          }
 
         } else {
-          this.buffer.push($event.keyCode);
+          this.buffer.push(keyCode);
 
           if (this.detectCombination() === 'command + delete') {
-            getWeek(week).delRow($index)
+            getWeek(week).delRow(rowIndex)
           }
         }
       },
@@ -75,6 +105,14 @@ angular
           .position('top right')
           .hideDelay(1500)
       );
+
+      // to makrdown
+      $scope.markdown =
+        $scope.thisWeek.toMarkdown() + ' \n\n ' +
+        $scope.nextWeek.toMarkdown() + ' \n\n ' +
+        $scope.thoughts.toMarkdown();
+
+      return $scope.markdown;
     }
 
   })
