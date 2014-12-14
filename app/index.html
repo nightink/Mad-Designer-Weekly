@@ -70,7 +70,7 @@
               <tr ng-repeat="x in nextWeek.rows">
                 <td ng-repeat="y in nextWeek.cols">
                   <md-text-float ng-model="x['col_' + $index]"
-                  ng-keydown="keyboard.keydown($event, 'nextWeek', $parent.$index)"
+                  ng-keydown="keyboard.keydown($event, 'nextWeek', $parent.$index, $index)"
                   ng-keyup="keyboard.keyup($event, 'nextWeek')"></md-text-float>
                 </td>
               </tr>
