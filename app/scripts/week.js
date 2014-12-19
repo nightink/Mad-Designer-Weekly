@@ -96,22 +96,22 @@ angular.module('app')
 
     // 继续简单粗暴的做法，可以考虑用非字符串拼接的方式实现
     Week.prototype.toMarkdown = function() {
-      var markdown = this.markdown = ' ';
+      var markdown = this.markdown = '';
 
       // title
       markdown += '### ';
       markdown += this.title;
-      markdown += ' \n\n ';
+      markdown += ' \n\n';
 
       // columns
-      markdown += ' | ';
+      markdown += '| ';
       this.cols.forEach(function(col) {
         markdown += col.text;
         markdown += ' | ';
       })
 
-      markdown += ' \n ';
-      markdown += ' | ';
+      markdown += '\n';
+      markdown += '| ';
       this.cols.forEach(function(col) {
         markdown += '------';
         markdown += ' | ';
@@ -127,8 +127,8 @@ angular.module('app')
           }
         }
 
-        markdown += ' \n ';
-        markdown += ' | ';
+        markdown += '\n';
+        markdown += '| ';
         temp.forEach(function(t) {
           markdown += t;
           markdown += ' | ';

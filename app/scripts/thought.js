@@ -9,11 +9,11 @@ angular.module('app')
     }
 
     Thought.prototype.toMarkdown = function() {
-      var markdown = this.markdown = ' ';
+      var markdown = this.markdown = '';
 
       markdown += '### ';
       markdown += this.title;
-      markdown += ' \n\n  ';
+      markdown += ' \n\n';
       markdown += this.content;
 
       return markdown;

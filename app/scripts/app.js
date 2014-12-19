@@ -25,7 +25,7 @@ angular
     $scope.thisWeek = new Week({
       el: document.getElementById('thisWeek'),
       title: '个人参与项目',
-      cols: [{text: '工作任务'}, {text: '参与人', width: 200}, {text: '工作完成进度', width: 150}, {text: '耗时', width: 150}]
+      cols: [{text: '工作任务', width: 400}, {text: '参与人', width: 250}, {text: '工作完成进度', width: 150}, {text: '耗时', width: 150}]
     });
 
     $scope.nextWeek = new Week({
@@ -108,8 +108,8 @@ angular
 
       // to makrdown
       $scope.markdown =
-        $scope.thisWeek.toMarkdown() + ' \n\n ' +
-        $scope.nextWeek.toMarkdown() + ' \n\n ' +
+        $scope.thisWeek.toMarkdown() + ' \n\n' +
+        $scope.nextWeek.toMarkdown() + ' \n\n' +
         $scope.thoughts.toMarkdown();
 
       return $scope.markdown;

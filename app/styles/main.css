@@ -9,13 +9,15 @@ body {
   top: 65px;
   right: 35px;
   z-index: 1001;
-  font-size: 1.2em;
+  font-size: 1.0em;
+  width: 44px !important;
+  height: 44px !important;
 }
 
 .key-shortcut {
   width: 90%;
   padding: 40px 40px 0;
-  color: #DBDBDB;
+  color: #637379;
   font-size: 0.8em;
 }
 
@@ -36,15 +38,17 @@ body {
 }
 
 .container table thead tr {
-  border-bottom: 1px solid #03a9f4;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .container table th {
   padding: 10px 0;
+  color: rgba(255, 255, 255, 0.32);
 }
 
 .container table input {
   width: 100%;
+  margin-right: 10px;
   font-size: 0.8em;
 }
 
