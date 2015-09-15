@@ -1,4 +1,4 @@
-Mad-Desinger-Weekly
+Mad-Designer-Weekly
 ===================
 
 每次写周报的日子。。设计师们总是会各种抓狂。。  
